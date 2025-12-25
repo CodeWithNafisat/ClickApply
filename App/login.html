@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ClickApply</title>
+    <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1 class="brand-logo">ClickApply</h1>
+                <h2 class="auth-title">Welcome back</h2>
+                <p class="auth-subtitle">Log in to continue your job search</p>
+            </div>
+
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email address</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="you@example.com"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                </div>
+
+                <div class="form-footer">
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary">Log in</button>
+            </form>
+
+            <div class="auth-alt">
+                <p class="alt-text">Don't have an account? <a href="signup.html" class="alt-link">Sign up</a></p>
+            </div>
+        </div>
+
+        <div class="auth-footer">
+            <a href="landing.html" class="back-link">← Back to home</a>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
