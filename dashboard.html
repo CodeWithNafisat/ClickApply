@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - ClickApply</title>
+    <style>
+/* ================================
+   CSS RESET & BASE STYLES
+   ================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    color: #111827; /* Darkest Gray for main text */
+    background-color: #f3f4f6; /* Light Gray for page background */
+    overflow-x: hidden;
+}
+
+/* ================================
+   SIDEBAR TOGGLE (Hidden Checkbox)
+   ================================ */
+.sidebar-toggle {
+    display: none;
+}
+
+/* ================================
+   TOP NAVIGATION BAR
+   ================================ */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background-color: #ffffff; /* White background */
+    border-bottom: 1px solid #e5e7eb; /* Light Gray border */
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 1.5rem;
+    max-width: 100%;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.menu-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 8px;
+    transition: transform 0.2s ease;
+}
+
+.menu-icon:hover {
+    transform: scale(1.05);
+}
+
+.menu-icon span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: #111827; /* Darkest Gray */
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:checked ~ .top-nav .menu-icon span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.sidebar-toggle:checked ~ .top-nav .menu-icon span:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar-toggle:checked ~ .top-nav .menu-icon span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2563eb; /* Brand Blue for logo */
+    letter-spacing: -0.5px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8); /* Brand Blue gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+}
+
+/* ================================
+   SIDEBAR
+   ================================ */
+.sidebar {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 260px;
+    height: calc(100vh - 64px);
+    background-color: #ffffff; /* White sidebar background */
+    border-right: 1px solid #e5e7eb; /* Light Gray border */
+    padding: 1.5rem 0;
+    z-index: 90;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+}
+
+.sidebar-toggle:checked ~ .sidebar {
+    transform: translateX(0);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0 1rem;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    color: #4b5563; /* Gray for inactive links */
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background-color: transparent;
+}
+
+.sidebar-item:hover {
+    background-color: #f9fafb; /* Very Light Gray on hover */
+    color: #111827; /* Darkest Gray text on hover */
+}
+
+.sidebar-item.active {
+    background-color: #f9fafb; /* Very Light Gray active background */
+    color: #2563eb; /* Brand Blue active text */
+}
+
+.sidebar-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    color: inherit; /* Inherit color from parent */
+}
+
+/* ================================
+   SIDEBAR OVERLAY
+   ================================ */
+.sidebar-overlay {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 80;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-toggle:checked ~ .sidebar-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ================================
+   MAIN CONTENT
+   ================================ */
+.main-content {
+    margin-top: 64px;
+    padding: 2rem 1.5rem;
+    transition: margin-left 0.3s ease;
+    background-color: #f3f4f6; /* Light Gray background */
+}
+
+/* ================================
+   WELCOME SECTION
+   ================================ */
+.welcome-section {
+    margin-bottom: 2rem;
+}
+
+.welcome-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827; /* Darkest Gray for headings */
+    margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+    font-size: 1rem;
+    color: #6b7280; /* Medium Gray for subtext */
+}
+
+/* ================================
+   CTA SECTION
+   ================================ */
+.cta-section {
+    margin-bottom: 3rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: #2563eb; /* Brand Blue */
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8; /* Darker Brand Blue on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3); /* Brand Blue shadow */
+}
+
+.btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ================================
+   USAGE SECTION
+   ================================ */
+.usage-section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827; /* Darkest Gray for section titles */
+    margin-bottom: 1.5rem;
+}
+
+.usage-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.usage-card {
+    background-color: #ffffff; /* White card background */
+    border: 1px solid #e5e7eb; /* Light Gray border */
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.usage-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+}
+
+.usage-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.usage-card-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827; /* Darkest Gray for card titles */
+}
+
+.usage-card-icon {
+    width: 24px;
+    height: 24px;
+    color: #2563eb; /* Brand Blue for icons */
+}
+
+.usage-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.usage-progress {
+    width: 100%;
+    height: 8px;
+    background-color: #e5e7eb; /* Light Gray progress bar background */
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.usage-progress-bar {
+    height: 100%;
+    background-color: #2563eb; /* Brand Blue progress bar */
+    border-radius: 999px;
+    transition: width 0.3s ease;
+}
+
+.usage-text {
+    font-size: 0.875rem;
+    color: #6b7280; /* Medium Gray for text */
+}
+
+/* ================================
+   RECENT APPLICATIONS SECTION
+   ================================ */
+.recent-section {
+    margin-bottom: 3rem;
+}
+
+.table-container {
+    background-color: #ffffff; /* White table background */
+    border: 1px solid #e5e7eb; /* Light Gray border */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.applications-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.applications-table thead {
+    background-color: #f9fafb; /* Very Light Gray header background */
+    border-bottom: 1px solid #e5e7eb; /* Light Gray border */
+}
+
+.applications-table th {
+    padding: 1rem;
+    text-align: left;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #4b5563; /* Gray for table headers */
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.applications-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb; /* Light Gray border */
+    font-size: 0.9375rem;
+    color: #111827; /* Darkest Gray for table data */
+}
+
+.applications-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.applications-table tbody tr:hover {
+    background-color: #f9fafb; /* Very Light Gray on hover */
+}
+
+.company-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.company-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8); /* Brand Blue gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.375rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-success {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge-warning {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.badge-error {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+/* ================================
+   RESPONSIVE DESIGN - TABLETS
+   ================================ */
+@media (min-width: 768px) {
+    .usage-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .main-content {
+        padding: 2.5rem 2rem;
+    }
+
+    .welcome-title {
+        font-size: 2.25rem;
+    }
+
+    .welcome-subtitle {
+        font-size: 1.125rem;
+    }
+
+    .applications-table {
+        display: table;
+    }
+}
+
+/* ================================
+   RESPONSIVE DESIGN - DESKTOP
+   ================================ */
+@media (min-width: 1024px) {
+    .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay {
+        display: none;
+    }
+
+    .menu-icon {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 260px;
+        padding: 3rem 3rem;
+    }
+
+    .usage-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .nav-container {
+        padding: 0 2rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    .main-content {
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: calc(260px + 3rem);
+        padding-right: 3rem;
+    }
+}
+
+/* ================================
+   MOBILE TABLE RESPONSIVENESS
+   ================================ */
+@media (max-width: 767px) {
+    .applications-table thead {
+        display: none;
+    }
+
+    .applications-table,
+    .applications-table tbody,
+    .applications-table tr,
+    .applications-table td {
+        display: block;
+    }
+
+    .applications-table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .applications-table td {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid #e5e7eb;
+        position: relative;
+        padding-left: 40%;
+    }
+
+    .applications-table td:last-child {
+        border-bottom: none;
+    }
+
+    .applications-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        font-weight: 600;
+        color: #4b5563; /* Gray for labels */
+        font-size: 0.875rem;
+        text-transform: uppercase;
+    }
+
+    .applications-table td:nth-child(1)::before {
+        content: 'Company';
+    }
+
+    .applications-table td:nth-child(2)::before {
+        content: 'Position';
+    }
+
+    .applications-table td:nth-child(3)::before {
+        content: 'Status';
+    }
+
+    .applications-table td:nth-child(4)::before {
+        content: 'Date';
+    }
+
+    .company-cell {
+        justify-content: flex-start;
+    }
+}
+
+/* ================================
+   ACCESSIBILITY
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Hidden checkbox for sidebar toggle -->
+    <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
+    
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <label for="sidebar-toggle" class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <div class="logo">ClickApply</div>
+            </div>
+            <div class="nav-right">
+                <div class="user-avatar">
+                    <span>JD</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="sidebar-item active">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="3" width="7" height="7"></rect>
+                    <rect x="14" y="14" width="7" height="7"></rect>
+                    <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="#new-application" class="sidebar-item">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                <span>New Application</span>
+            </a>
+            <a href="profile.html" class="sidebar-item">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span>Resume & Profile</span>
+            </a>
+            <a href="#history" class="sidebar-item">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>Applications History</span>
+            </a>
+            <a href="#usage" class="sidebar-item">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>Usage Limits</span>
+            </a>
+            <a href="#settings" class="sidebar-item">
+                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 1v6m0 6v6m5.2-14.8l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H5m14.8 5.2l-4.2-4.2m-2-2l-4.2-4.2"></path>
+                </svg>
+                <span>Settings</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Sidebar Overlay -->
+    <label for="sidebar-toggle" class="sidebar-overlay"></label>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <h1 class="welcome-title">Welcome back, John</h1>
+            <p class="welcome-subtitle">Ready to apply to your dream job?</p>
+        </section>
+
+        <!-- Primary CTA -->
+        <section class="cta-section">
+            <button class="btn btn-primary btn-large">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Start New Application
+            </button>
+        </section>
+
+        <!-- Usage Limits Cards -->
+        <section class="usage-section">
+            <h2 class="section-title">Usage Limits</h2>
+            <div class="usage-cards">
+                <div class="usage-card">
+                    <div class="usage-card-header">
+                        <h3 class="usage-card-title">Daily</h3>
+                        <svg class="usage-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="usage-card-body">
+                        <div class="usage-progress">
+                            <div class="usage-progress-bar" style="width: 60%;"></div>
+                        </div>
+                        <p class="usage-text">3 of 5 applications used</p>
+                    </div>
+                </div>
+
+                <div class="usage-card">
+                    <div class="usage-card-header">
+                        <h3 class="usage-card-title">Weekly</h3>
+                        <svg class="usage-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="usage-card-body">
+                        <div class="usage-progress">
+                            <div class="usage-progress-bar" style="width: 35%;"></div>
+                        </div>
+                        <p class="usage-text">7 of 20 applications used</p>
+                    </div>
+                </div>
+
+                <div class="usage-card">
+                    <div class="usage-card-header">
+                        <h3 class="usage-card-title">Monthly</h3>
+                        <svg class="usage-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
+                    <div class="usage-card-body">
+                        <div class="usage-progress">
+                            <div class="usage-progress-bar" style="width: 22%;"></div>
+                        </div>
+                        <p class="usage-text">11 of 50 applications used</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Applications -->
+        <section class="recent-section">
+            <h2 class="section-title">Recent Applications</h2>
+            <div class="table-container">
+                <table class="applications-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Position</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="company-cell">
+                                    <div class="company-avatar">G</div>
+                                    <span>Google</span>
+                                </div>
+                            </td>
+                            <td>Senior Software Engineer</td>
+                            <td><span class="badge badge-success">Submitted</span></td>
+                            <td>Dec 23, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="company-cell">
+                                    <div class="company-avatar">M</div>
+                                    <span>Microsoft</span>
+                                </div>
+                            </td>
+                            <td>Product Manager</td>
+                            <td><span class="badge badge-warning">In Progress</span></td>
+                            <td>Dec 22, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="company-cell">
+                                    <div class="company-avatar">A</div>
+                                    <span>Amazon</span>
+                                </div>
+                            </td>
+                            <td>DevOps Engineer</td>
+                            <td><span class="badge badge-success">Submitted</span></td>
+                            <td>Dec 21, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="company-cell">
+                                    <div class="company-avatar">M</div>
+                                    <span>Meta</span>
+                                </div>
+                            </td>
+                            <td>Frontend Developer</td>
+                            <td><span class="badge badge-error">Failed</span></td>
+                            <td>Dec 20, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="company-cell">
+                                    <div class="company-avatar">A</div>
+                                    <span>Apple</span>
+                                </div>
+                            </td>
+                            <td>UX Designer</td>
+                            <td><span class="badge badge-success">Submitted</span></td>
+                            <td>Dec 19, 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>

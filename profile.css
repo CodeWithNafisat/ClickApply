@@ -1,0 +1,471 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #111827; /* Darkest Gray for main text */
+    background-color: #f3f4f6; /* Light Gray for page background */
+    min-height: 100vh;
+}
+
+/* Sidebar Toggle (Hidden Checkbox) */
+.sidebar-toggle {
+    display: none;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background-color: #ffffff; /* White sidebar background */
+    border-right: 1px solid #e5e7eb; /* Light Gray border */
+    color: #4b5563; /* Gray text */
+    overflow-y: auto;
+    z-index: 999;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb; /* Light Gray border */
+}
+
+.sidebar-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #111827; /* Darkest Gray for logo */
+    text-decoration: none;
+}
+
+.sidebar-nav {
+    padding: 1rem 0;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 0.875rem 1.5rem;
+    color: #4b5563; /* Gray for inactive links */
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link:hover {
+    background-color: #f9fafb; /* Very Light Gray on hover */
+    color: #111827; /* Darker text on hover */
+}
+
+.sidebar-link.active {
+    background-color: #f9fafb; /* Very Light Gray active background */
+    color: #2563eb; /* Brand Blue active text */
+    border-left-color: #2563eb; /* Brand Blue border */
+}
+
+.sidebar-icon {
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+    width: 1.5rem;
+    text-align: center;
+    color: inherit; /* Inherit color from parent */
+}
+
+.sidebar-text {
+    font-size: 0.9375rem;
+    font-weight: 500;
+}
+
+.sidebar-logout {
+    margin-top: 2rem;
+    border-top: 1px solid #e5e7eb; /* Light Gray border */
+    padding-top: 1.875rem;
+}
+
+/* Main Wrapper */
+.main-wrapper {
+    margin-left: 260px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: margin-left 0.3s ease;
+    background-color: #f3f4f6; /* Light Gray main background */
+}
+
+/* Top Navigation Bar */
+.topbar {
+    background-color: #ffffff; /* White background */
+    border-bottom: 1px solid #e5e7eb; /* Light Gray border */
+    padding: 1rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 0.25rem;
+}
+
+.hamburger {
+    width: 1.5rem;
+    height: 2px;
+    background-color: #374151; /* Dark Gray for hamburger */
+    transition: all 0.3s;
+}
+
+.topbar-right {
+    margin-left: auto;
+}
+
+.back-link {
+    color: #6b7280; /* Medium Gray for back link */
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #2563eb; /* Brand Blue on hover */
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 2rem 0;
+    background-color: #f3f4f6; /* Light Gray background */
+}
+
+.profile-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.profile-header h1 {
+    font-size: 2rem;
+    color: #111827; /* Darkest Gray for headings */
+    margin-bottom: 0.5rem;
+}
+
+.profile-header p {
+    color: #6b7280; /* Medium Gray for subtext */
+    font-size: 1rem;
+}
+
+/* Form Styles */
+.profile-form {
+    background-color: #ffffff; /* White card background */
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+}
+
+.form-section:last-of-type {
+    margin-bottom: 2rem;
+}
+
+.form-section h2 {
+    font-size: 1.25rem;
+    color: #111827; /* Darkest Gray for section headings */
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e5e7eb; /* Light Gray border */
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    font-weight: 500;
+    color: #374151; /* Dark Gray for labels */
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db; /* Light Gray border */
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-family: inherit;
+    color: #111827; /* Darkest Gray for text */
+    background-color: #ffffff; /* White background */
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb; /* Brand Blue focus border */
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1); /* Brand Blue focus shadow */
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9ca3af; /* Light Gray placeholder */
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* File Upload */
+.file-upload-wrapper {
+    position: relative;
+}
+
+.file-input {
+    position: absolute;
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.file-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border: 2px dashed #d1d5db; /* Light Gray dashed border */
+    border-radius: 0.375rem;
+    background-color: #f9fafb; /* Very Light Gray background */
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.file-label:hover {
+    border-color: #2563eb; /* Brand Blue on hover */
+    background-color: #eff6ff; /* Light Blue background on hover */
+}
+
+.file-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #6b7280; /* Medium Gray for icon */
+}
+
+.file-text {
+    color: #374151; /* Dark Gray for text */
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.file-hint {
+    color: #6b7280; /* Medium Gray for hint text */
+    font-size: 0.875rem;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb; /* Light Gray border */
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    transition: all 0.2s;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #2563eb; /* Brand Blue */
+    color: #ffffff; /* White text */
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8; /* Darker blue on hover */
+}
+
+.btn-secondary {
+    background-color: #ffffff; /* White background */
+    color: #374151; /* Dark Gray text */
+    border: 1px solid #d1d5db; /* Light Gray border */
+}
+
+.btn-secondary:hover {
+    background-color: #f9fafb; /* Very Light Gray on hover */
+}
+
+/* Footer */
+.footer {
+    background-color: #ffffff; /* White background */
+    border-top: 1px solid #e5e7eb; /* Light Gray border */
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+.footer p {
+    text-align: center;
+    color: #6b7280; /* Medium Gray text */
+    font-size: 0.875rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .sidebar-toggle:checked ~ .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle:checked ~ .sidebar-overlay {
+        display: block;
+        opacity: 1;
+    }
+
+    .sidebar-toggle:checked ~ .main-wrapper .menu-toggle .hamburger:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .sidebar-toggle:checked ~ .main-wrapper .menu-toggle .hamburger:nth-child(2) {
+        opacity: 0;
+    }
+
+    .sidebar-toggle:checked ~ .main-wrapper .menu-toggle .hamburger:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .profile-header p {
+        font-size: 0.875rem;
+    }
+
+    .profile-form {
+        padding: 1.5rem;
+    }
+
+    .form-section h2 {
+        font-size: 1.125rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .back-link {
+        display: none;
+    }
+
+    .topbar {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .profile-form {
+        padding: 1rem;
+        border-radius: 0.375rem;
+    }
+
+    .profile-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-section {
+        margin-bottom: 2rem;
+    }
+
+    .file-label {
+        padding: 1.5rem 1rem;
+    }
+
+    .file-icon {
+        font-size: 2rem;
+    }
+
+    .sidebar {
+        width: 280px;
+    }
+}
