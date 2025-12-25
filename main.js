@@ -326,15 +326,15 @@ document.addEventListener('DOMContentLoaded', () => {
             // Change "Sign Up" to "Go to Dashboard"
             if (ctaBtns) {
                 ctaBtns.forEach(btn => {
-                    btn.textContent = 'Go to Dashboard';
-                    btn.href = 'dashboard.html';
+                    btn.textContent = 'Sign Up';
+                    btn.href = 'signup.html';
                 });
             }
             
             // Hide Login button or change to "Profile"
             if (loginBtn) {
-                loginBtn.textContent = 'My Profile';
-                loginBtn.href = 'profile.html';
+                loginBtn.textContent = 'Login';
+                loginBtn.href = 'login.html';
             }
         }
     }

@@ -134,7 +134,6 @@ body {
     height: calc(100vh - 64px);
     background-color: #ffffff; /* White sidebar background */
     border-right: 1px solid #e5e7eb; /* Light Gray border */
-    padding: 1.5rem 0;
     z-index: 90;
     transform: translateX(-100%);
     transition: transform 0.3s ease;
@@ -145,14 +144,28 @@ body {
     transform: translateX(0);
 }
 
+.sidebar-header {
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+.sidebar-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2563eb;
+    text-decoration: none;
+    display: block;
+}
+
 .sidebar-nav {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    padding: 0 1rem;
+    padding: 1rem;
 }
 
-.sidebar-item {
+.sidebar-link {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -166,12 +179,12 @@ body {
     background-color: transparent;
 }
 
-.sidebar-item:hover {
+.sidebar-link:hover {
     background-color: #f9fafb; /* Very Light Gray on hover */
     color: #111827; /* Darkest Gray text on hover */
 }
 
-.sidebar-item.active {
+.sidebar-link.active {
     background-color: #f9fafb; /* Very Light Gray active background */
     color: #2563eb; /* Brand Blue active text */
 }
@@ -180,7 +193,20 @@ body {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    color: inherit; /* Inherit color from parent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.125rem;
+}
+
+.sidebar-logout {
+    margin-top: 1rem;
+    color: #dc2626;
+}
+
+.sidebar-logout:hover {
+    background-color: #fef2f2;
+    color: #991b1b;
 }
 
 /* ================================
@@ -274,6 +300,7 @@ body {
 .btn-icon {
     width: 20px;
     height: 20px;
+    stroke: currentColor;
 }
 
 /* ================================
@@ -326,6 +353,7 @@ body {
     width: 24px;
     height: 24px;
     color: #2563eb; /* Brand Blue for icons */
+    stroke: currentColor;
 }
 
 .usage-card-body {
@@ -491,7 +519,7 @@ body {
 
     .main-content {
         margin-left: 260px;
-        padding: 3rem 3rem;
+        padding: 3rem;
     }
 
     .usage-cards {
@@ -587,6 +615,18 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
     </style>
 </head>
 <body>
@@ -594,10 +634,10 @@ body {
     <input type="checkbox" id="sidebar-toggle" class="sidebar-toggle">
     
     <!-- Top Navigation Bar -->
-    <nav class="top-nav">
+    <nav class="top-nav" aria-label="Main navigation">
         <div class="nav-container">
             <div class="nav-left">
-                <label for="sidebar-toggle" class="menu-icon">
+                <label for="sidebar-toggle" class="menu-icon" aria-label="Toggle sidebar menu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -605,7 +645,7 @@ body {
                 <div class="logo">ClickApply</div>
             </div>
             <div class="nav-right">
-                <div class="user-avatar">
+                <div class="user-avatar" aria-label="User menu" role="button" tabindex="0">
                     <span>JD</span>
                 </div>
             </div>
@@ -613,59 +653,51 @@ body {
     </nav>
 
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Sidebar navigation">
+        <div class="sidebar-header">
+            <!-- Removed ClickApply logo from sidebar -->
+        </div>
+        
         <nav class="sidebar-nav">
-            <a href="dashboard.html" class="sidebar-item active">
-                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="3" width="7" height="7"></rect>
-                    <rect x="14" y="14" width="7" height="7"></rect>
-                    <rect x="3" y="14" width="7" height="7"></rect>
-                </svg>
-                <span>Dashboard</span>
+            <a href="landing.html" class="sidebar-link">
+                <span class="sidebar-icon">🏠</span>
+                <span class="sidebar-text">Home</span>
             </a>
-            <a href="#new-application" class="sidebar-item">
-                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-                <span>New Application</span>
+
+            <a href="dashboard.html" class="sidebar-link active">
+                <span class="sidebar-icon">📊</span>
+                <span class="sidebar-text">Dashboard</span>
             </a>
-            <a href="profile.html" class="sidebar-item">
-                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                </svg>
-                <span>Resume & Profile</span>
+            
+            <a href="new_application.html" class="sidebar-link">
+                <span class="sidebar-icon">➕</span>
+                <span class="sidebar-text">New Application</span>
             </a>
-            <a href="#history" class="sidebar-item">
-                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
-                <span>Applications History</span>
+            
+            <a href="profile.html" class="sidebar-link">
+                <span class="sidebar-icon">👤</span>
+                <span class="sidebar-text">Resume & Profile</span>
             </a>
-            <a href="#usage" class="sidebar-item">
-                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-                <span>Usage Limits</span>
+            
+            <a href="applications.html" class="sidebar-link">
+                <span class="sidebar-icon">📋</span>
+                <span class="sidebar-text">Applications History</span>
             </a>
-            <a href="#settings" class="sidebar-item">
-                <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M12 1v6m0 6v6m5.2-14.8l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H5m14.8 5.2l-4.2-4.2m-2-2l-4.2-4.2"></path>
-                </svg>
-                <span>Settings</span>
+            
+            <a href="settings.html" class="sidebar-link">
+                <span class="sidebar-icon">⚙️</span>
+                <span class="sidebar-text">Settings</span>
+            </a>
+            
+            <a href="login.html" class="sidebar-link sidebar-logout">
+                <span class="sidebar-icon">🚪</span>
+                <span class="sidebar-text">Logout</span>
             </a>
         </nav>
     </aside>
 
     <!-- Sidebar Overlay -->
-    <label for="sidebar-toggle" class="sidebar-overlay"></label>
+    <div class="sidebar-overlay" role="button" tabindex="-1" aria-label="Close sidebar"></div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -677,7 +709,7 @@ body {
 
         <!-- Primary CTA -->
         <section class="cta-section">
-            <button class="btn btn-primary btn-large">
+            <button class="btn btn-primary btn-large" onclick="window.location.href='new_application.html'">
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="12" y1="5" x2="12" y2="19"></line>
                     <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -687,8 +719,8 @@ body {
         </section>
 
         <!-- Usage Limits Cards -->
-        <section class="usage-section">
-            <h2 class="section-title">Usage Limits</h2>
+        <section class="usage-section" aria-labelledby="usage-title">
+            <h2 class="section-title" id="usage-title">Usage Limits</h2>
             <div class="usage-cards">
                 <div class="usage-card">
                     <div class="usage-card-header">
@@ -699,7 +731,7 @@ body {
                         </svg>
                     </div>
                     <div class="usage-card-body">
-                        <div class="usage-progress">
+                        <div class="usage-progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
                             <div class="usage-progress-bar" style="width: 60%;"></div>
                         </div>
                         <p class="usage-text">3 of 5 applications used</p>
@@ -717,7 +749,7 @@ body {
                         </svg>
                     </div>
                     <div class="usage-card-body">
-                        <div class="usage-progress">
+                        <div class="usage-progress" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">
                             <div class="usage-progress-bar" style="width: 35%;"></div>
                         </div>
                         <p class="usage-text">7 of 20 applications used</p>
@@ -735,7 +767,7 @@ body {
                         </svg>
                     </div>
                     <div class="usage-card-body">
-                        <div class="usage-progress">
+                        <div class="usage-progress" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100">
                             <div class="usage-progress-bar" style="width: 22%;"></div>
                         </div>
                         <p class="usage-text">11 of 50 applications used</p>
@@ -745,79 +777,79 @@ body {
         </section>
 
         <!-- Recent Applications -->
-        <section class="recent-section">
-            <h2 class="section-title">Recent Applications</h2>
+        <section class="recent-section" aria-labelledby="recent-applications-title">
+            <h2 class="section-title" id="recent-applications-title">Recent Applications</h2>
             <div class="table-container">
                 <table class="applications-table">
                     <thead>
                         <tr>
-                            <th>Company</th>
-                            <th>Position</th>
-                            <th>Status</th>
-                            <th>Date</th>
+                            <th scope="col">Company</th>
+                            <th scope="col">Position</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Date</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
+                            <td data-label="Company">
                                 <div class="company-cell">
-                                    <div class="company-avatar">G</div>
+                                    <div class="company-avatar" aria-hidden="true">G</div>
                                     <span>Google</span>
                                 </div>
                             </td>
-                            <td>Senior Software Engineer</td>
-                            <td><span class="badge badge-success">Submitted</span></td>
-                            <td>Dec 23, 2025</td>
+                            <td data-label="Position">Senior Software Engineer</td>
+                            <td data-label="Status"><span class="badge badge-success">Submitted</span></td>
+                            <td data-label="Date">Dec 23, 2025</td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Company">
                                 <div class="company-cell">
-                                    <div class="company-avatar">M</div>
+                                    <div class="company-avatar" aria-hidden="true">M</div>
                                     <span>Microsoft</span>
                                 </div>
                             </td>
-                            <td>Product Manager</td>
-                            <td><span class="badge badge-warning">In Progress</span></td>
-                            <td>Dec 22, 2025</td>
+                            <td data-label="Position">Product Manager</td>
+                            <td data-label="Status"><span class="badge badge-warning">In Progress</span></td>
+                            <td data-label="Date">Dec 22, 2025</td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Company">
                                 <div class="company-cell">
-                                    <div class="company-avatar">A</div>
+                                    <div class="company-avatar" aria-hidden="true">A</div>
                                     <span>Amazon</span>
                                 </div>
                             </td>
-                            <td>DevOps Engineer</td>
-                            <td><span class="badge badge-success">Submitted</span></td>
-                            <td>Dec 21, 2025</td>
+                            <td data-label="Position">DevOps Engineer</td>
+                            <td data-label="Status"><span class="badge badge-success">Submitted</span></td>
+                            <td data-label="Date">Dec 21, 2025</td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Company">
                                 <div class="company-cell">
-                                    <div class="company-avatar">M</div>
+                                    <div class="company-avatar" aria-hidden="true">M</div>
                                     <span>Meta</span>
                                 </div>
                             </td>
-                            <td>Frontend Developer</td>
-                            <td><span class="badge badge-error">Failed</span></td>
-                            <td>Dec 20, 2025</td>
+                            <td data-label="Position">Frontend Developer</td>
+                            <td data-label="Status"><span class="badge badge-error">Failed</span></td>
+                            <td data-label="Date">Dec 20, 2025</td>
                         </tr>
                         <tr>
-                            <td>
+                            <td data-label="Company">
                                 <div class="company-cell">
-                                    <div class="company-avatar">A</div>
+                                    <div class="company-avatar" aria-hidden="true">A</div>
                                     <span>Apple</span>
                                 </div>
                             </td>
-                            <td>UX Designer</td>
-                            <td><span class="badge badge-success">Submitted</span></td>
-                            <td>Dec 19, 2025</td>
+                            <td data-label="Position">UX Designer</td>
+                            <td data-label="Status"><span class="badge badge-success">Submitted</span></td>
+                            <td data-label="Date">Dec 19, 2025</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </section>
     </main>
-    <script src="main.js"></script>
+     <script src="main.js"></script>
 </body>
 </html>
