@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Cover Letter & Resume - ClickApply</title>
+    <link rel="stylesheet" href="cover_resume_generation.css">
+    <link rel="stylesheet" href="dynamic_styles.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="logo">ClickApply</a>
+            </div>
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search jobs, applications..." class="search-input">
+                    <span class="search-icon">🔍</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="notification-btn">🔔</button>
+                <div class="user-menu">
+                    <img id="user-avatar-img" src="https://via.placeholder.com/40" alt="User" class="user-avatar">
+                    <span id="user-name-display" class="user-name">John Doe</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="index.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span class="sidebar-text">Home</span>
+                </a>
+
+                <a href="dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">📊</span>
+                    <span class="sidebar-text">Dashboard</span>
+                </a>
+                
+                <a href="profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">👤</span>
+                    <span class="sidebar-text">Resume & Profile</span>
+                </a>
+                
+                <a href="settings.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span class="sidebar-text">Settings</span>
+                </a>
+                
+                <a href="login.html" class="sidebar-link sidebar-logout">
+                    <span class="sidebar-icon">🚪</span>
+                    <span class="sidebar-text">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <!-- Breadcrumb Navigation -->
+                <div class="breadcrumb">
+                    <a href="dashboard.html" class="breadcrumb-link">Dashboard</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <a href="job_details.html" class="breadcrumb-link">Job Details</a>
+                    <span class="breadcrumb-separator">›</span>
+                    <span class="breadcrumb-current">Cover Letter & Resume</span>
+                </div>
+
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1 class="page-title">Cover Letter & Resume Generation</h1>
+                    <p class="page-subtitle">Review and edit your application materials before submission</p>
+                </div>
+
+                <!-- Job Title Header -->
+                <div class="job-header-card">
+                    <div class="job-header-content">
+                        <h2 id="job-title-display" class="job-title">Senior Frontend Developer</h2>
+                        <p id="company-name-display" class="company-name">TechCorp Inc.</p>
+                    </div>
+                    <div class="job-header-badge">
+                        <span class="status-badge status-draft">Draft</span>
+                    </div>
+                </div>
+
+                <!-- Cover Letter Section -->
+                <section class="section-card">
+                    <div class="section-header">
+                        <h3 class="section-title">Cover Letter</h3>
+                        <span class="section-status">AI Generated</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="editor-container">
+                            <textarea id="cover-letter-editor" class="cover-letter-editor" rows="16"></textarea>
+                        </div>
+                        <div class="editor-actions">
+                            <button class="btn btn-secondary" id="edit-cover-letter-btn">Edit</button>
+                            <button class="btn btn-secondary" id="regenerate-cover-letter-btn">Regenerate</button>
+                            <button class="btn btn-primary" id="accept-cover-letter-btn">Accept Cover Letter</button>
+                        </div>
+                        <div id="cover-letter-success" class="success-message">
+                            <span class="success-icon">✅</span>
+                            Cover letter accepted successfully!
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Resume Section -->
+                <section class="section-card">
+                    <div class="section-header">
+                        <h3 class="section-title">ATS-Optimized Resume</h3>
+                        <span class="section-status">Tailored to Job</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="resume-preview">
+                            <div class="resume-content">
+                                <!-- Dynamic Resume Content will be populated here -->
+                                <div id="resume-content-dynamic"></div>
+                            </div>
+                        </div>
+                        <div class="editor-actions">
+                            <button class="btn btn-secondary" id="edit-resume-btn">Edit Resume</button>
+                            <button class="btn btn-primary" id="download-resume-btn">Download as .doc</button>
+                        </div>
+                        <div id="resume-success" class="success-message">
+                            <span class="success-icon">✅</span>
+                            Resume downloaded successfully!
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Action Buttons -->
+                <div class="final-actions">
+                    <button class="btn btn-outline" id="save-draft-btn">Save as Draft</button>
+                    <button class="btn btn-primary btn-large" id="submit-application-btn">Submit Application</button>
+                </div>
+                <div id="draft-success" class="success-message">
+                    <span class="success-icon">✅</span>
+                    Application saved as draft successfully!
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="config.js"></script>
+    <script src="cover_resume_profile.js"></script>
+</body>
+</html>

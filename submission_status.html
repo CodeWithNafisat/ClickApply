@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Status - ClickApply</title>
+    <link rel="stylesheet" href="submission_status.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="menu-toggle">☰</button>
+                <div class="logo">ClickApply</div>
+            </div>
+            <div class="nav-right">
+                <div class="user-avatar" id="userAvatar">JD</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="index.html" class="sidebar-link">
+                    <span class="sidebar-icon">🏠</span>
+                    <span class="sidebar-text">Home</span>
+                </a>
+
+                <a href="dashboard.html" class="sidebar-link">
+                    <span class="sidebar-icon">📊</span>
+                    <span class="sidebar-text">Dashboard</span>
+                </a>
+                
+                <a href="profile.html" class="sidebar-link">
+                    <span class="sidebar-icon">👤</span>
+                    <span class="sidebar-text">Resume & Profile</span>
+                </a>
+                
+                <a href="settings.html" class="sidebar-link">
+                    <span class="sidebar-icon">⚙️</span>
+                    <span class="sidebar-text">Settings</span>
+                </a>
+                
+                <a href="login.html" class="sidebar-link sidebar-logout">
+                    <span class="sidebar-icon">🚪</span>
+                    <span class="sidebar-text">Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <div class="status-container">
+                <!-- Default State - No Submission Yet -->
+                <div class="status-card" id="noSubmissionState">
+                    <div class="status-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <circle cx="32" cy="32" r="32" fill="#f3f4f6"/>
+                            <path d="M24 24L40 40M40 24L24 40" stroke="#9ca3af" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    
+                    <h1 class="status-title">No Recent Submissions</h1>
+                    
+                    <p class="status-message">
+                        You haven't submitted any job applications recently. Start applying to track your progress and manage your applications.
+                    </p>
+                    
+                    <div class="status-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📊</span>
+                            <span class="detail-text">Applications used: <span id="currentApplications">0</span> of <span id="totalApplications">10</span> this month</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">📅</span>
+                            <span class="detail-text">Last submission: <span id="lastSubmissionDate">Never</span></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">🎯</span>
+                            <span class="detail-text">Your profile is <span id="profileCompletion">85%</span> complete</span>
+                        </div>
+                    </div>
+                    
+                    <div class="status-actions">
+                        <a href="new_application.html" class="btn btn-primary">Start New Application</a>
+                        <a href="dashboard.html" class="btn btn-secondary">Go to Dashboard</a>
+                    </div>
+                </div>
+
+                <!-- Submission Success State (Hidden by default) -->
+                <div class="status-card" id="successState" style="display: none;">
+                    <div class="status-icon success">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <circle cx="32" cy="32" r="32" fill="#2563eb"/>
+                            <path d="M20 32L28 40L44 24" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    
+                    <h1 class="status-title" id="successTitle">Application Submitted Successfully!</h1>
+                    
+                    <p class="status-message" id="successMessage"></p>
+                    
+                    <div class="status-details" id="successDetails"></div>
+                    
+                    <div class="status-actions">
+                        <a href="dashboard.html" class="btn btn-primary">View Dashboard</a>
+                        <a href="new_application.html" class="btn btn-secondary">Apply to Another Job</a>
+                    </div>
+                </div>
+
+                <!-- Submission Error State (Hidden by default) -->
+                <div class="status-card error-card" id="errorState" style="display: none;">
+                    <div class="status-icon error">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <circle cx="32" cy="32" r="32" fill="#dc2626"/>
+                            <path d="M24 24L40 40M40 24L24 40" stroke="white" stroke-width="4" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    
+                    <h1 class="status-title" id="errorTitle">Submission Failed</h1>
+                    
+                    <p class="status-message" id="errorMessage"></p>
+                    
+                    <div class="status-details" id="errorDetails"></div>
+                    
+                    <div class="status-actions">
+                        <button class="btn btn-primary" id="retryButton">Try Again</button>
+                        <a href="dashboard.html" class="btn btn-secondary">Return to Dashboard</a>
+                    </div>
+                </div>
+
+                <!-- Recent Submissions Section (Only shows after first submission) -->
+                <div class="recent-submissions" id="recentSubmissionsSection" style="display: none; margin-top: 2rem;">
+                    <div class="status-card">
+                        <h2 style="font-size: 1.5rem; font-weight: 600; color: #111827; margin-bottom: 1.5rem; text-align: center;">Recent Submissions</h2>
+                        
+                        <div class="submissions-list" id="submissionsList">
+                            <!-- Recent submissions will be dynamically added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="application_tracker.js"></script>
+</body>
+</html>
