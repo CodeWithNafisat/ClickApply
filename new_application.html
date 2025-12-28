@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start New Application - ClickApply</title>
+    <link rel="stylesheet" href="new_application.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo">ClickApply</div>
+            <div class="nav-right">
+                <div class="menu-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="user-avatar">JD</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <a href="index.html" class="sidebar-link">
+                <span class="sidebar-icon">🏠</span>
+                <span class="sidebar-text">Home</span>
+            </a>
+
+            <a href="dashboard.html" class="sidebar-link">
+                <span class="sidebar-icon">📊</span>
+                <span class="sidebar-text">Dashboard</span>
+            </a>
+             <a href="new_application.html" class="sidebar-link">
+                <span class="sidebar-icon">➕</span>
+                <span class="sidebar-text">New Application</span>
+            </a>
+            
+            <a href="profile.html" class="sidebar-link">
+                <span class="sidebar-icon">👤</span>
+                <span class="sidebar-text">Resume & Profile</span>
+            </a>
+            
+            <a href="settings.html" class="sidebar-link">
+                <span class="sidebar-icon">⚙️</span>
+                <span class="sidebar-text">Settings</span>
+            </a>
+            
+            <a href="login.html" class="sidebar-link sidebar-logout">
+                <span class="sidebar-icon">🚪</span>
+                <span class="sidebar-text">Logout</span>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-wrapper">
+            <!-- Page Header -->
+            <header class="page-header">
+                <h1 class="page-title">Start New Application</h1>
+                <p class="page-subtitle">Jobs matched to your profile today</p>
+            </header>
+
+            <!-- Matched Jobs Grid -->
+            <div class="jobs-grid">
+                <!-- Job Card 1 -->
+                <article class="job-card">
+                    <div class="job-card-header">
+                        <h2 class="job-title">Senior Product Designer</h2>
+                        <span class="match-badge">95% Match</span>
+                    </div>
+                    <div class="company-info">
+                        <p class="company-name">TechCorp Solutions</p>
+                        <p class="job-location">San Francisco, CA</p>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            $120k - $160k
+                        </span>
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            Remote
+                        </span>
+                    </div>
+                    <p class="match-reason">Matched based on your UX design experience and portfolio</p>
+                    <div class="job-card-actions single-button">
+                            <a href="job_details.html" class="btn-primary">View Job</a>
+                    </div>
+                </article>
+
+                <!-- Job Card 2 -->
+                <article class="job-card">
+                    <div class="job-card-header">
+                        <h2 class="job-title">UX/UI Designer</h2>
+                        <span class="match-badge">92% Match</span>
+                    </div>
+                    <div class="company-info">
+                        <p class="company-name">InnovateLab</p>
+                        <p class="job-location">New York, NY</p>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            $100k - $140k
+                        </span>
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            Hybrid
+                        </span>
+                    </div>
+                    <p class="match-reason">Matched based on your Figma and design systems expertise</p>
+                    <div class="job-card-actions single-button">
+                            <a href="job_details.html" class="btn-primary">View Job</a>
+                    </div>
+                </article>
+
+                <!-- Job Card 3 -->
+                <article class="job-card">
+                    <div class="job-card-header">
+                        <h2 class="job-title">Lead Product Designer</h2>
+                        <span class="match-badge">89% Match</span>
+                    </div>
+                    <div class="company-info">
+                        <p class="company-name">DesignHub Inc.</p>
+                        <p class="job-location">Austin, TX</p>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            $130k - $170k
+                        </span>
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            Remote
+                        </span>
+                    </div>
+                    <p class="match-reason">Matched based on your leadership and team management skills</p>
+                    <div class="job-card-actions single-button">
+                            <a href="job_details.html" class="btn-primary">View Job</a>
+                    </div>
+                </article>
+
+                <!-- Job Card 4 -->
+                <article class="job-card">
+                    <div class="job-card-header">
+                        <h2 class="job-title">Product Designer</h2>
+                        <span class="match-badge">88% Match</span>
+                    </div>
+                    <div class="company-info">
+                        <p class="company-name">StartupXYZ</p>
+                        <p class="job-location">Seattle, WA</p>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            $95k - $130k
+                        </span>
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            Onsite
+                        </span>
+                    </div>
+                    <p class="match-reason">Matched based on your startup experience and agile methodology</p>
+                    <div class="job-card-actions single-button">
+                            <a href="job_details.html" class="btn-primary">View Job</a>
+                    </div>
+                </article>
+
+                <!-- Job Card 5 -->
+                <article class="job-card">
+                    <div class="job-card-header">
+                        <h2 class="job-title">Senior UX Designer</h2>
+                        <span class="match-badge">87% Match</span>
+                    </div>
+                    <div class="company-info">
+                        <p class="company-name">GlobalTech Partners</p>
+                        <p class="job-location">Boston, MA</p>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            $110k - $150k
+                        </span>
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            Hybrid
+                        </span>
+                    </div>
+                    <p class="match-reason">Matched based on your user research and testing experience</p>
+                    <div class="job-card-actions single-button">
+                            <a href="job_details.html" class="btn-primary">View Job</a>
+                    </div>
+                </article>
+
+                <!-- Job Card 6 -->
+                <article class="job-card">
+                    <div class="job-card-header">
+                        <h2 class="job-title">Design Lead</h2>
+                        <span class="match-badge">85% Match</span>
+                    </div>
+                    <div class="company-info">
+                        <p class="company-name">Creative Studios</p>
+                        <p class="job-location">Los Angeles, CA</p>
+                    </div>
+                    <div class="job-details">
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            $125k - $165k
+                        </span>
+                        <span class="detail-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                            </svg>
+                            Remote
+                        </span>
+                    </div>
+                    <p class="match-reason">Matched based on your visual design and branding expertise</p>
+                    <div class="job-card-actions single-button">
+                        <a href="job_details.html" class="btn-primary">View Job</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+    <script src="application_jobdetails.js"></script>
+</body>
+</html>
